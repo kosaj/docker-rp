@@ -16,14 +16,16 @@ services:
       context: ./example-client
     depends_on:
       - example-api
-    ports:
-      - '4200:80'
+    # It is better to expose apps via reverse proxy
+    # ports:
+    #   - '4200:80'
     restart: on-failure
 
   example-api:
     image: example-api
     build:
       context: ./example-api
-    ports:
-      - '5001:5001'
+    # It is better to expose apps via reverse proxy
+    # ports:
+    #   - '5001:5001'
     restart: on-failure

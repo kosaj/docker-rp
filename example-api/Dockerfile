@@ -10,6 +10,7 @@ RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-EXPOSE 5001
+# api expose port 80 when running production code.
+EXPOSE 80
 COPY --from=build-env /src/out .
 ENTRYPOINT [ "dotnet", "example-api.dll" ]

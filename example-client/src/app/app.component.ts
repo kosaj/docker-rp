@@ -12,8 +12,14 @@ export class AppComponent {
   constructor(private readonly httpClient: HttpClient) {}
 
   send(port?: string): void {
+    if (port) {
+      // This is not required as reverse proxy handles routing.
+      this.httpClient
+      .get(`${window.origin}:${port}/test`)
+      .subscribe((response) => console.log(response));
+    }
     this.httpClient
-      .get(`${window.origin}${port}/test`)
+      .get(`/test`)
       .subscribe((response) => console.log(response));
   }
 }
