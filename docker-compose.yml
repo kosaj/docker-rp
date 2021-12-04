@@ -11,6 +11,7 @@ services:
       - '80:80'
       
   example-client:
+    container_name: example-client
     image: example-client
     build:
       context: ./example-client
