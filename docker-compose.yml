@@ -1,4 +1,9 @@
 version: '3.8'
+
+networks:
+  example:
+    driver: bridge
+
 services:
   reverse-proxy:
     container_name: example-nginx
@@ -10,6 +15,8 @@ services:
       - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - '7000:80'
+    networks:
+      - example
       
   example-client:
     container_name: example-client
@@ -18,6 +25,8 @@ services:
       context: ./example-client
     depends_on:
       - example-api
+    networks:
+      - example
     restart: on-failure
 
   example-api:
@@ -25,4 +34,6 @@ services:
     image: example-api
     build:
       context: ./example-api
+    networks:
+      - example
     restart: on-failure
